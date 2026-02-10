@@ -1050,6 +1050,49 @@ body::before {
     background: linear-gradient(135deg, #2d1b4e 0%, #1a1a3e 100%);
 }
 
+/* B站iframe嵌入视频样式 */
+.bilibili-iframe {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bilibili-iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110%; /* 放大以隐藏底部控制条 */
+    border: none;
+    object-fit: cover;
+    transform: translateY(-4.5%); /* 向上偏移，隐藏底部控制条 */
+}
+
+.bilibili-iframe-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 比例 */
+    height: 0;
+    overflow: hidden;
+}
+
+.bilibili-iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110%; /* 放大以隐藏底部控制条 */
+    border: none;
+    transform: translateY(-4.5%); /* 向上偏移，隐藏底部控制条 */
+}
+
+/* 游戏主视频区域 */
+.game-main-video .bilibili-iframe-container {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
 /* 植被系统预览 */
 .vegetation {
     background: linear-gradient(180deg, #0f291e 0%, #1a4231 100%);

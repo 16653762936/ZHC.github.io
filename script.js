@@ -467,6 +467,60 @@ function copyEmail() {
 }
 
 // ========================================
+// B站视频自动重载功能（实现循环播放效果）
+// ========================================
+function initBilibiliVideoLoop() {
+    const iframes = document.querySelectorAll('.bilibili-iframe iframe, .bilibili-iframe-container iframe');
+    
+    // 视频时长配置（秒）- 根据实际视频长度调整
+    const videoDurations = {
+        'p=1': 45,  // 独立游戏宣传视频
+        'p=2': 30,  // 驾鹤西去
+        'p=3': 45,  // 交互植被
+        'p=4': 30,  // 全局物理场
+        'p=5': 60,  // Houdini重定向
+        'p=6': 30,  // 入青云
+        'p=7': 90   // 作品集混剪
+    };
+    
+    iframes.forEach((iframe, index) => {
+        const src = iframe.src;
+        let duration = 60; // 默认60秒
+        
+        // 根据p参数确定视频时长
+        for (const [key, value] of Object.entries(videoDurations)) {
+            if (src.includes(key)) {
+                duration = value;
+                break;
+            }
+        }
+        
+        // 存储原始src用于重载
+        const originalSrc = src;
+        
+        // 等待iframe加载完成后再启动计时器
+        iframe.addEventListener('load', () => {
+            console.log(`视频${index + 1}加载完成，将在${duration}秒后循环`);
+            
+            // 视频播放完毕后重新加载（加上3秒缓冲）
+            setInterval(() => {
+                console.log(`重载视频${index + 1}`);
+                // 先清空src再设置，确保重新加载
+                iframe.src = '';
+                setTimeout(() => {
+                    iframe.src = originalSrc;
+                }, 100);
+            }, (duration + 3) * 1000);
+        });
+    });
+}
+
+// 页面加载完成后启动B站视频循环
+document.addEventListener('DOMContentLoaded', () => {
+    initBilibiliVideoLoop();
+});
+
+// ========================================
 // 复制百度网盘链接功能
 // ========================================
 function copyBaiduLink() {
