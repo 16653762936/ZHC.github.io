@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Art Portfolio | 技术美术作品集</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">TA</span>
+                <span class="logo-text">郑海川个人作品展示</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">首页</a></li>
+                <li><a href="#portfolio">作品</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 + 关于我 合并 -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Technical Artist</div>
+            <h1 class="hero-title">
+                <span class="title-line">让技术充满</span>
+                <span class="title-line highlight">艺术</span>
+            </h1>
+            <p class="hero-subtitle">专注于游戏视觉开发，程序化生成，工具开发，性能优化。</p>
+            <a href="#portfolio" class="cta-button">
+                <span>浏览作品</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+            </a>
+        </div>
+        
+        <!-- 关于我信息卡片 -->
+        <div class="hero-about-card">
+            <div class="about-card-content">
+                <div class="about-avatar">
+                    <span>HC</span>
+                </div>
+                <div class="about-info">
+                    <div class="about-header">
+                        <h3 class="about-name">郑海川</h3>
+                        <span class="about-tag">Technical Artist</span>
+                    </div>
+                    <div class="about-meta">
+                        <span class="meta-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                            </svg>
+                            浙江传媒学院 · 27届电影制作
+                        </span>
+                    </div>
+                    <p class="about-desc">拥有2年技术美术工作经验，曾任职于<span class="highlight-company">腾讯光子工作室群</span>，参与多款 3A 游戏前期预研与制作，完成 TA 相关工具，效果开发与流程打通</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>向下滚动</span>
+        </div>
+    </section>
+
+    <!-- 作品展示区域 -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="section-title">精选作品</h2>
+                <p class="section-desc">探索技术与艺术的完美融合</p>
+            </div>
+
+            <!-- 分类筛选 -->
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="showreel">混剪</button>
+                <button class="filter-btn" data-filter="project">参与项目</button>
+                <button class="filter-btn" data-filter="visual">效果实现</button>
+                <button class="filter-btn" data-filter="vfx">视觉特效</button>
+                <button class="filter-btn" data-filter="procedural">程序化</button>
+                <button class="filter-btn" data-filter="tool">工具开发</button>
+            </div>
+
+            <!-- 作品网格 -->
+            <div class="portfolio-grid">
+                <!-- 作品0: 总作品集混剪 -->
+                <article class="portfolio-item" data-category="showreel">
+                    <div class="item-image">
+                        <div class="image-placeholder showreel-video">
+                            <video class="portfolio-video" autoplay muted loop playsinline>
+                                <source src="assets/videos/projects/Show.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item-overlay">
+                            <button class="view-btn">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <div class="item-tags">
+                            <span class="tag">作品集</span>
+                            <span class="tag">总览</span>
+                        </div>
+                        <h3 class="item-title">技术美术作品集混剪</h3>
+                        <p class="item-desc">精选作品总览，展示技术美术综合能力与创意实现</p>
+                    </div>
+                </article>
+
+                <!-- 作品1: 入青云特效制作 -->
+                <article class="portfolio-item" data-category="project">
+                    <div class="item-image">
+                        <div class="image-placeholder ruqingyun-video">
+                            <video class="portfolio-video" autoplay muted loop playsinline>
+                                <source src="assets/videos/projects/Ruqingyun.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item-overlay">
+                            <button class="view-btn">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <div class="item-tags">
+                            <span class="tag">Houdini</span>
+                            <span class="tag">Pyro</span>
+                        </div>
+                        <h3 class="item-title">参与电视剧《入青云》特效制作</h3>
+                        <p class="item-desc">参与制作特效，龙卷风和法阵</p>
+                    </div>
+                </article>
+
+                <!-- 作品2: 驾鹤西去动画毕设 -->
+                <article class="portfolio-item" data-category="project">
+                    <div class="item-image">
+                        <div class="image-placeholder goewst-video">
+                            <video class="portfolio-video" autoplay muted loop playsinline>
+                                <source src="assets/videos/projects/GoEwst.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item-overlay">
+                            <button class="view-btn">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <div class="item-tags">
+                            <span class="tag">Houdini</span>
+                            <span class="tag">Pyro</span>
+                            <span class="tag">Vellum</span>
+                        </div>
+                        <h3 class="item-title">北京电影学院毕设《驾鹤西去》</h3>
+                        <p class="item-desc">参与制作火焰、布料特效</p>
+                    </div>
+                </article>
+                <!-- 作品6: 交互植被视频 -->
+                <article class="portfolio-item" data-category="visual">
+                    <div class="item-image">
+                        <div class="image-placeholder interactive-vegetation">
+                            <video class="portfolio-video" autoplay muted loop playsinline>
+                                <source src="assets/videos/projects/interactive-vegetation.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item-overlay">
+                            <button class="view-btn">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <div class="item-tags">
+                            <span class="tag">交互</span>
+                            <span class="tag">植被</span>
+                            <span class="tag">RT</span>
+                        </div>
+                        <h3 class="item-title">交互式植被系统</h3>
+                        <p class="item-desc">基于RT的植被交互系统，支持风力、碰撞和踩踏效果</p>
+                    </div>
+                </article>
+
+                <!-- 作品7: 全局物理场视频 -->
+                <article class="portfolio-item" data-category="visual">
+                    <div class="item-image">
+                        <div class="image-placeholder physics-field">
+                            <video class="portfolio-video" autoplay muted loop playsinline>
+                                <source src="assets/videos/projects/Physics.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item-overlay">
+                            <button class="view-btn">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <div class="item-tags">
+                            <span class="tag">物理模拟</span>
+                            <span class="tag">场系统</span>
+                        </div>
+                        <h3 class="item-title">全局物理场</h3>
+                        <p class="item-desc">实时全局物理场计算系统，支持力场、湍流和涡流效果</p>
+                    </div>
+                </article>
+
+                <!-- 作品8: Houdini程序化重定向视频 -->
+                <article class="portfolio-item" data-category="procedural">
+                    <div class="item-image">
+                        <div class="image-placeholder retarget">
+                            <video class="portfolio-video" autoplay muted loop playsinline>
+                                <source src="assets/videos/projects/retarget.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item-overlay">
+                            <button class="view-btn">查看详情</button>
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <div class="item-tags">
+                            <span class="tag">Houdini</span>
+                            <span class="tag">动画</span>
+                            <span class="tag">重定向</span>
+                        </div>
+                        <h3 class="item-title">Houdini程序化重定向</h3>
+                        <p class="item-desc">右边为动画资产，左边为无骨骼模型重定向后的结果</p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 独立游戏展示区域 -->
+    <section id="games" class="games-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Indie Games</span>
+                <h2 class="section-title">独立游戏</h2>
+                <p class="section-desc">个人或团队开发的独立游戏项目</p>
+            </div>
+
+            <!-- 游戏1: MyInteractGame -->
+            <article class="game-showcase">
+                <div class="game-header">
+                    <div class="game-title-area">
+                        <h3 class="game-title">MyInteractGame</h3>
+                        <div class="game-tags">
+                            <span class="tag">UE5</span>
+                            <span class="tag">交互叙事</span>
+                            <span class="tag">独立游戏</span>
+                        </div>
+                    </div>
+                    <p class="game-intro">一款基于虚幻引擎5开发的交互叙事游戏，融合创新的交互机制与沉浸式故事体验，探索玩家与游戏世界的新型互动方式。</p>
+                </div>
+
+                <div class="game-media">
+                    <!-- 主视频 -->
+                    <div class="game-main-video portfolio-item" data-category="game">
+                        <div class="item-image">
+                            <video class="portfolio-video game-video" autoplay muted loop playsinline poster="assets/images/projects/MyInteractGame/Index.jpg">
+                                <source src="assets/videos/projects/MyInteractGameVideo/宣传视频.mp4" type="video/mp4">
+                            </video>
+                            <div class="item-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="item-info" style="display: none;">
+                            <h3 class="item-title">MyInteractGame</h3>
+                            <p class="item-desc">一款基于虚幻引擎5开发的交互叙事游戏，融合创新的交互机制与沉浸式故事体验，探索玩家与游戏世界的新型互动方式。</p>
+                        </div>
+                    </div>
+
+                    <!-- 图片网格 - 横向排列在视频下方，4张图片等宽 -->
+                    <div class="game-gallery">
+                        <div class="gallery-item">
+                            <img src="assets/images/projects/MyInteractGame/Img1.png" alt="游戏截图1" loading="lazy">
+                            <div class="gallery-overlay">界面展示</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/images/projects/MyInteractGame/Img2.png" alt="游戏截图2" loading="lazy">
+                            <div class="gallery-overlay">画面展示</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/images/projects/MyInteractGame/Img3.png" alt="游戏截图3" loading="lazy">
+                            <div class="gallery-overlay">场景展示</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/images/projects/MyInteractGame/Img5.png" alt="游戏截图4" loading="lazy">
+                            <div class="gallery-overlay">交互细节</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-details">
+                    <div class="detail-item">
+                        <span class="detail-label">开发周期</span>
+                        <span class="detail-value">一星期</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">团队规模</span>
+                        <span class="detail-value">2H4c-1</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">我的职责</span>
+                        <span class="detail-value">全栈开发、技术美术，导演，后期</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">平台</span>
+                        <span class="detail-value">PC</span>
+                    </div>
+                </div>
+
+                <!-- 百度网盘下载链接 -->
+                <div class="game-download">
+                    <span class="download-label">游戏下载</span>
+                    <div class="download-link-wrapper">
+                        <span class="download-url">点击右侧复制按钮获取游戏百度网盘链接：命运请等待Demo链接: https://pan.baidu.com/s/1g73O1lh_xacVnOdasa6IsA?pwd=kyd4 提取码: kyd4</span>
+                        <button class="copy-btn" onclick="copyBaiduLink()" title="复制链接">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                            <span class="copy-tooltip">复制</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <span class="section-tag">Contact</span>
+                    <h2 class="section-title">联系我</h2>
+                    <p class="contact-desc">有项目合作意向或技术交流？欢迎随时联系我</p>
+                    <div class="contact-links">
+                        <div class="contact-link email-copy-wrapper">
+                            <a href="mailto:1758972636@qq.com" class="email-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                                <span class="email-text">1758972636@qq.com</span>
+                            </a>
+                            <button class="copy-btn" onclick="copyEmail()" title="复制邮箱">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                                <span class="copy-tooltip">复制</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频模态框 -->
+    <div id="videoModal" class="video-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="video-container">
+                <video id="modalVideo" controls>
+                    <source src="" type="video/mp4">
+                </video>
+            </div>
+            <div class="modal-info">
+                <h3 id="modalTitle">视频标题</h3>
+                <p id="modalDesc">视频描述</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">TA</span>
+                    <span class="footer-text">Technical Art Portfolio</span>
+                </div>
+                <p class="footer-copy">&copy; 2026 Technical Artist. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
