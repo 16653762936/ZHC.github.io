@@ -467,57 +467,149 @@ function copyEmail() {
 }
 
 // ========================================
-// B站视频自动重载功能（实现循环播放效果）
+// 视频控制功能（可选）
 // ========================================
-function initBilibiliVideoLoop() {
-    const iframes = document.querySelectorAll('.bilibili-iframe iframe, .bilibili-iframe-container iframe');
+function initVideoControls() {
+    const videos = document.querySelectorAll('video');
     
-    // 视频时长配置（秒）- 根据实际视频长度调整
-    const videoDurations = {
-        'p=1': 45,  // 独立游戏宣传视频
-        'p=2': 30,  // 驾鹤西去
-        'p=3': 45,  // 交互植被
-        'p=4': 30,  // 全局物理场
-        'p=5': 60,  // Houdini重定向
-        'p=6': 30,  // 入青云
-        'p=7': 90   // 作品集混剪
-    };
-    
-    iframes.forEach((iframe, index) => {
-        const src = iframe.src;
-        let duration = 60; // 默认60秒
+    videos.forEach(video => {
+        // 确保视频静音（浏览器要求自动播放必须静音）
+        video.muted = true;
         
-        // 根据p参数确定视频时长
-        for (const [key, value] of Object.entries(videoDurations)) {
-            if (src.includes(key)) {
-                duration = value;
-                break;
-            }
-        }
+        // 视频加载完成后自动播放
+        video.addEventListener('loadedmetadata', () => {
+            video.play().catch(err => {
+                console.log('自动播放被阻止:', err);
+            });
+        });
         
-        // 存储原始src用于重载
-        const originalSrc = src;
-        
-        // 等待iframe加载完成后再启动计时器
-        iframe.addEventListener('load', () => {
-            console.log(`视频${index + 1}加载完成，将在${duration}秒后循环`);
-            
-            // 视频播放完毕后重新加载（加上3秒缓冲）
-            setInterval(() => {
-                console.log(`重载视频${index + 1}`);
-                // 先清空src再设置，确保重新加载
-                iframe.src = '';
-                setTimeout(() => {
-                    iframe.src = originalSrc;
-                }, 100);
-            }, (duration + 3) * 1000);
+        // 视频结束后重新开始（双重保险，即使loop属性失效）
+        video.addEventListener('ended', () => {
+            video.currentTime = 0;
+            video.play().catch(err => {
+                console.log('循环播放被阻止:', err);
+            });
         });
     });
 }
 
-// 页面加载完成后启动B站视频循环
+// ========================================
+// 视频模态框功能
+// ========================================
+let videoModalInstance = null; // 全局变量，确保只创建一个模态框实例
+
+function initVideoModal() {
+    // 检查是否已经创建了模态框实例
+    if (videoModalInstance) {
+        return;
+    }
+    
+    // 创建模态框元素
+    const modal = document.createElement('div');
+    modal.className = 'video-modal';
+    modal.innerHTML = `
+        <div class="video-modal-content">
+            <video controls class="modal-video"></video>
+            <button class="video-modal-close">&times;</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    videoModalInstance = modal;
+
+    const modalVideo = modal.querySelector('.modal-video');
+    const closeBtn = modal.querySelector('.video-modal-close');
+    let currentVideo = null; // 记录当前打开的小窗视频
+
+    // 为所有视频按钮添加点击事件
+    const toggleButtons = document.querySelectorAll('.video-toggle-btn');
+    toggleButtons.forEach(button => {
+        // 移除可能存在的旧事件监听器
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+        
+        newButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // 阻止事件冒泡
+            
+            const video = newButton.closest('.video-container').querySelector('video');
+            
+            if (video) {
+                currentVideo = video;
+                const videoSrc = video.querySelector('source').src;
+                modalVideo.src = videoSrc;
+                modalVideo.currentTime = video.currentTime;
+                modalVideo.muted = false; // 开启声音
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // 防止背景滚动
+                
+                // 确保视频播放
+                modalVideo.play().catch(err => {
+                    console.log('自动播放被阻止:', err);
+                });
+            }
+        });
+    });
+
+    // 关闭模态框
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // 阻止事件冒泡
+        modal.classList.remove('active');
+        modalVideo.pause();
+        document.body.style.overflow = '';
+        
+        // 确保小窗视频保持播放但静音
+        if (currentVideo) {
+            currentVideo.muted = true;
+            if (currentVideo.paused) {
+                currentVideo.play().catch(err => {
+                    console.log('自动播放被阻止:', err);
+                });
+            }
+        }
+    });
+
+    // 点击模态框外部关闭
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            modalVideo.pause();
+            document.body.style.overflow = '';
+            
+            // 确保小窗视频保持播放但静音
+            if (currentVideo) {
+                currentVideo.muted = true;
+                if (currentVideo.paused) {
+                    currentVideo.play().catch(err => {
+                        console.log('自动播放被阻止:', err);
+                    });
+                }
+            }
+        }
+    });
+
+    // 按ESC键关闭
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+            modalVideo.pause();
+            document.body.style.overflow = '';
+            
+            // 确保小窗视频保持播放但静音
+            if (currentVideo) {
+                currentVideo.muted = true;
+                if (currentVideo.paused) {
+                    currentVideo.play().catch(err => {
+                        console.log('自动播放被阻止:', err);
+                    });
+                }
+            }
+        }
+    });
+}
+
+// 页面加载完成后初始化视频控制
 document.addEventListener('DOMContentLoaded', () => {
-    initBilibiliVideoLoop();
+    initVideoControls();
+    initVideoModal();
 });
 
 // ========================================

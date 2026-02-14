@@ -1050,7 +1050,124 @@ body::before {
     background: linear-gradient(135deg, #2d1b4e 0%, #1a1a3e 100%);
 }
 
-/* B站iframe嵌入视频样式 */
+/* 视频容器样式 */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    outline: none;
+}
+
+/* 视频播放/暂停按钮 */
+.video-toggle-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.video-container:hover .video-toggle-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.video-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: white;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-toggle-btn::before {
+    content: '▶';
+    color: white;
+    font-size: 20px;
+    margin-left: 3px;
+}
+
+.video-toggle-btn.paused::before {
+    content: '⏸';
+    margin-left: 0;
+}
+
+/* 游戏主视频区域 */
+.game-main-video .video-container {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 16/9;
+}
+
+/* 视频模态框样式 */
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-modal.active {
+    display: flex;
+}
+
+.video-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+}
+
+.video-modal video {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    border-radius: 8px;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.video-modal-close:hover {
+    transform: scale(1.1);
+    color: #ff4757;
+}
+
+/* 兼容旧的B站iframe样式（如果有残留） */
 .bilibili-iframe {
     position: relative;
     width: 100%;
@@ -1059,14 +1176,10 @@ body::before {
 }
 
 .bilibili-iframe iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 110%; /* 放大以隐藏底部控制条 */
+    height: 100%;
     border: none;
     object-fit: cover;
-    transform: translateY(-4.5%); /* 向上偏移，隐藏底部控制条 */
 }
 
 .bilibili-iframe-container {
@@ -1082,16 +1195,11 @@ body::before {
     top: 0;
     left: 0;
     width: 100%;
-    height: 110%; /* 放大以隐藏底部控制条 */
+    height: 100%;
     border: none;
-    transform: translateY(-4.5%); /* 向上偏移，隐藏底部控制条 */
 }
 
-/* 游戏主视频区域 */
-.game-main-video .bilibili-iframe-container {
-    border-radius: var(--radius-md);
-    overflow: hidden;
-}
+
 
 /* 植被系统预览 */
 .vegetation {
