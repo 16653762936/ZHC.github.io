@@ -2273,6 +2273,7 @@ body::before {
 }
 
 @media (max-width: 768px) {
+    /* 导航栏 */
     .nav-links {
         display: none;
         position: absolute;
@@ -2294,10 +2295,13 @@ body::before {
         display: flex;
     }
     
+    /* 作品集网格 */
     .portfolio-grid {
         grid-template-columns: 1fr;
+        gap: var(--space-md);
     }
     
+    /* 英雄区域 */
     .hero-stats {
         flex-direction: column;
         gap: var(--space-sm);
@@ -2313,18 +2317,176 @@ body::before {
         font-size: 1.5rem;
     }
     
+    /* 技能网格 */
     .skills-grid {
         grid-template-columns: 1fr;
     }
     
+    /* 关于统计 */
     .about-stats {
         flex-wrap: wrap;
     }
     
+    /* 页脚 */
     .footer-content {
         flex-direction: column;
         gap: var(--space-sm);
         text-align: center;
+    }
+    
+    /* 视频容器 */
+    .video-container {
+        aspect-ratio: 16/9;
+    }
+    
+    /* 视频播放按钮 */
+    .video-toggle-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .video-toggle-btn::before {
+        font-size: 16px;
+        margin-left: 2px;
+    }
+    
+    /* 视频模态框 */
+    .video-modal-content {
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+    
+    .video-modal video {
+        max-height: 70vh;
+    }
+    
+    .video-modal-close {
+        top: -30px;
+        right: -10px;
+        font-size: 24px;
+    }
+    
+    /* 作品卡片 */
+    .portfolio-item {
+        padding: var(--space-sm);
+    }
+    
+    .item-info {
+        padding: var(--space-sm);
+    }
+    
+    .item-title {
+        font-size: 1.2rem;
+    }
+    
+    .item-desc {
+        font-size: 0.9rem;
+    }
+    
+    /* 字体大小调整 */
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    p {
+        font-size: 0.95rem;
+    }
+    
+    /* 间距调整 */
+    section {
+        padding: var(--space-md) 0;
+    }
+    
+    .container {
+        padding: 0 var(--space-sm);
+    }
+    
+    .section-header {
+        margin-bottom: var(--space-md);
+    }
+    
+    /* 游戏主视频区域 */
+    .game-main-video .video-container {
+        border-radius: var(--radius-sm);
+    }
+}
+
+/* 针对小屏幕手机的额外调整 */
+@media (max-width: 480px) {
+    /* 导航栏 */
+    .logo-text {
+        font-size: 1rem;
+    }
+    
+    /* 英雄区域 */
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+    
+    /* 视频播放按钮 */
+    .video-toggle-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .video-toggle-btn::before {
+        font-size: 14px;
+    }
+    
+    /* 视频模态框 */
+    .video-modal video {
+        max-height: 60vh;
+    }
+    
+    /* 作品卡片 */
+    .portfolio-item {
+        padding: var(--space-xs);
+    }
+    
+    .item-info {
+        padding: var(--space-xs);
+    }
+    
+    .item-title {
+        font-size: 1.1rem;
+    }
+    
+    .item-desc {
+        font-size: 0.85rem;
+    }
+    
+    /* 字体大小进一步调整 */
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+    
+    h3 {
+        font-size: 1.1rem;
+    }
+    
+    p {
+        font-size: 0.9rem;
     }
 }
 
