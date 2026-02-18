@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>校园一站式服务微信小程序 | 技术美术作品集</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 校园服务小程序页面样式 */
+        .campus-service-section {
+            padding: 4rem 0;
+        }
+        
+        .service-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .service-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .service-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .service-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .service-preview {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+        }
+        
+        .preview-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: #f5f5f5;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .preview-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .service-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            transition: var(--transition-normal);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-hover);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: var(--transition-fast);
+        }
+        
+        .back-link:hover {
+            color: var(--text-primary);
+            transform: translateX(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .service-title {
+                font-size: 2rem;
+            }
+            
+            .preview-container {
+                height: 400px;
+            }
+            
+            .service-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">TA</span>
+                <span class="logo-text">郑海川个人作品展</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">首页</a></li>
+                <li><a href="index.html#portfolio">作品</a></li>
+                <li><a href="index.html#contact">联系</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 校园服务小程序展示区域 -->
+    <section class="campus-service-section">
+        <div class="container">
+            <div class="service-header">
+                <h1 class="service-title">校园一站式服务微信小程序</h1>
+                <p class="service-subtitle">Pixso + AiIDE 制作的智能校园服务平台，集成外卖快递代拿、小圆圈、组讯发布、闲置交易、交友等多种功能</p>
+            </div>
+
+            <div class="service-content">
+                <!-- 返回链接 -->
+                <a href="index.html" class="back-link" style="margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; transition: var(--transition-fast);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M5 12L12 5M5 12L12 19"/>
+                    </svg>
+                    返回首页
+                </a>
+                
+                <!-- 小程序预览 -->
+                <div class="service-preview">
+                    <h2>小程序预览</h2>
+                    <div class="preview-container" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; padding: 2rem;">
+                        <!-- 小程序界面预览图片 -->
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=campus%20service%20wechat%20mini%20program%20interface%20with%20morning%20greeting%20%22早安，小明%22%20and%20various%20campus%20service%20icons%20including%20campus%20circle,%20lost%20and%20found,%20second-hand%20trade,%20group%20buying,%20class%20help,%20and%20announcements%20in%20a%20mobile%20phone%20frame&image_size=portrait_4_3" alt="校园一站式服务微信小程序界面" style="max-width: 100%; max-height: 500px; object-fit: contain; box-shadow: var(--shadow-lg); border-radius: 20px;">
+                        
+                        <!-- 访问链接 -->
+                        <div style="margin-top: 2rem; text-align: center;">
+                            <a href="https://quick-tree-52593487.aisite.pixso.design" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--primary-gradient); color: white; border-radius: var(--radius-md); text-decoration: none; transition: var(--transition-fast);">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                    <polyline points="15 3 21 3 21 9"/>
+                                    <line x1="10" y1="14" x2="21" y2="3"/>
+                                </svg>
+                                访问小程序设计链接
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 功能特点 -->
+                <div class="service-features">
+                    <div class="feature-card">
+                        <span class="feature-icon">🍽️</span>
+                        <h3 class="feature-title">外卖快递代拿</h3>
+                        <p class="feature-desc">便捷的外卖和快递代拿服务，解决校园最后一公里问题</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🔄</span>
+                        <h3 class="feature-title">小圆圈</h3>
+                        <p class="feature-desc">校园社交圈，分享生活点滴，发现身边新鲜事</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">📢</span>
+                        <h3 class="feature-title">组讯发布</h3>
+                        <p class="feature-desc">社团活动、讲座、比赛等校园信息发布平台</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">♻️</span>
+                        <h3 class="feature-title">闲置交易</h3>
+                        <p class="feature-desc">校园二手物品交易市场，环保又实惠</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">👥</span>
+                        <h3 class="feature-title">交友服务</h3>
+                        <p class="feature-desc">基于兴趣爱好的校园交友平台，扩展社交圈</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🤖</span>
+                        <h3 class="feature-title">AI 赋能</h3>
+                        <p class="feature-desc">结合 Pixso 和 AiIDE ，打造智能校园服务体验</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">TA</span>
+                    <div>
+                        <div class="footer-text">郑海川个人作品展</div>
+                        <div class="footer-copy">© 2024 Technical Artist. All rights reserved.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script src="script.js"></script>
+</body>
+</html>

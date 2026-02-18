@@ -466,6 +466,44 @@ function copyEmail() {
     document.body.removeChild(tempInput);
 }
 
+function copyWechat() {
+    const wechat = 'zhc2004082909';
+    
+    // 创建临时输入框
+    const tempInput = document.createElement('input');
+    tempInput.value = wechat;
+    tempInput.style.position = 'absolute';
+    tempInput.style.left = '-9999px';
+    document.body.appendChild(tempInput);
+    
+    // 选择并复制
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999);
+    
+    try {
+        document.execCommand('copy');
+        showNotification('微信已复制到剪贴板！', 'success');
+        
+        // 更改按钮状态
+        const copyBtn = document.querySelector('.wechat-copy-wrapper .copy-btn');
+        const originalText = copyBtn.querySelector('.copy-tooltip').textContent;
+        copyBtn.classList.add('copied');
+        copyBtn.querySelector('.copy-tooltip').textContent = '已复制';
+        
+        // 2秒后恢复
+        setTimeout(() => {
+            copyBtn.classList.remove('copied');
+            copyBtn.querySelector('.copy-tooltip').textContent = originalText;
+        }, 2000);
+        
+    } catch (err) {
+        showNotification('复制失败，请手动复制', 'error');
+    }
+    
+    // 移除临时输入框
+    document.body.removeChild(tempInput);
+}
+
 // ========================================
 // 视频控制功能（可选）
 // ========================================
