@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="filename" content="ta_portfolio.html">
+    <title>TA Portfolio | 技术美术作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1', // Indigo 500
+                        secondary: '#06b6d4', // Cyan 500
+                        accent: '#8b5cf6', // Violet 500
+                        dark: '#02040a', // Richer Dark
+                        card: '#0B0F1A', // Tinted Dark
+                        surface: 'rgba(255, 255, 255, 0.03)',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'Microsoft YaHei', 'sans-serif'], // 更现代的无衬线字体
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-glow': 'conic-gradient(from 180deg at 50% 50%, #4338ca 0deg, #06b6d4 180deg, #4338ca 360deg)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #02040a;
+            color: #f8fafc;
+            width: 1440px;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        /* 动态光晕背景 */
+        .ambient-glow {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.03) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(60px);
+        }
+
+        .glass-header {
+            background: rgba(2, 4, 10, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* 升级版渐变文字 */
+        .gradient-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #22d3ee 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-shift 5s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .work-card {
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.3) 100%);
+        }
+
+        .work-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.1);
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid transparent;
+        }
+
+        .filter-btn.active {
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5f3fc;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+            color: #bae6fd;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* 装饰圆点网格 */
+        .dot-grid {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        /* 隐藏滚动条但保留功能 */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #02040a; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+    </style>
+</head>
+<body>
+    <!-- 背景层 -->
+    <div class="fixed inset-0 dot-grid z-[-2]"></div>
+    <div class="ambient-glow top-[-200px] left-[-200px]"></div>
+    <div class="ambient-glow bottom-[-200px] right-[-200px]" style="background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);"></div>
+
+    <!-- 导航栏 -->
+    <nav class="glass-header fixed top-0 w-[1440px] z-50 px-12 py-5 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-xl blur opacity-25 group-hover:opacity-75 transition duration-500"></div>
+                <div class="relative w-10 h-10 bg-card rounded-xl border border-white/10 flex items-center justify-center">
+                    <i data-lucide="layers" class="text-white w-5 h-5"></i>
+                </div>
+            </div>
+            <span class="text-xl font-bold tracking-tight text-slate-200">TA <span class="text-slate-500 font-light">|</span> <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400 font-mono">PORTFOLIO</span></span>
+        </div>
+        <div class="flex gap-10 text-sm font-medium text-slate-400">
+            <a href="#home" class="hover:text-white transition-colors relative group">
+                个人介绍
+                <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#works" class="hover:text-white transition-colors relative group">
+                作品展示
+                <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all group-hover:w-full"></span>
+            </a>
+            <a href="#contact" class="hover:text-white transition-colors relative group">
+                联系方式
+                <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all group-hover:w-full"></span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- 个人介绍 (Hero Section) -->
+    <section id="home" class="pt-52 pb-32 px-12 flex items-center justify-between relative">
+        <div class="w-1/2 z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-white/10 text-emerald-400 text-xs font-mono mb-8 hover:border-emerald-500/30 transition-colors cursor-default select-none">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                OPEN FOR OPPORTUNITIES
+            </div>
+            <h1 class="text-8xl font-black leading-[0.9] mb-8 tracking-tight">
+                连接 <br>
+                <span class="gradient-text">艺术 与 代码</span>
+            </h1>
+            <p class="text-slate-400 text-lg leading-relaxed max-w-xl mb-12 border-l-2 border-white/10 pl-6">
+                我是<strong class="text-white">技术美术师</strong>。专注于 Render Pipeline 定制、Shader 交互表现、PCG 程序化生成及工具链开发。在性能并不妥协的前提下，追求极致的视觉表现。
+            </p>
+            <div class="flex gap-5">
+                <button class="group relative px-8 py-4 bg-white text-dark rounded-xl font-bold flex items-center gap-2 overflow-hidden hover:scale-105 transition-transform">
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+                    <span class="relative z-10 group-hover:text-white transition-colors flex items-center gap-2">
+                        浏览作品集 <i data-lucide="arrow-down-right" class="w-5 h-5"></i>
+                    </span>
+                </button>
+                <button class="px-8 py-4 rounded-xl font-bold border border-white/10 hover:bg-white/5 transition-all text-slate-300 hover:text-white hover:border-white/30">
+                    下载简历 PDF
+                </button>
+            </div>
+        </div>
+        
+        <div class="w-1/2 flex justify-end relative h-[600px] items-center">
+            <!-- 抽象装饰 -->
+            <div class="absolute right-0 w-[500px] h-[600px] bg-gradient-to-b from-indigo-500/10 to-transparent rounded-[40px] border border-white/5 backdrop-blur-sm -skew-x-6 transform origin-bottom-left rotate-3 mix-blend-screen"></div>
+            
+            <div class="relative w-[480px] h-[620px] rounded-[32px] overflow-hidden border border-white/10 shadow-2xl skew-x-0 bg-card group">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-transparent to-transparent z-10"></div>
+                <!-- 模拟 Shader编辑器 界面元素 -->
+                <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=800&q=80" alt="tech art abstract" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000">
+                
+                <div class="absolute bottom-10 left-8 right-8 z-20">
+                    <div class="flex justify-between items-end backdrop-blur-md bg-white/5 p-6 rounded-2xl border border-white/10">
+                        <div>
+                            <p class="text-xs font-mono text-cyan-400 mb-1">CURRENT STATUS</p>
+                            <div class="text-2xl font-bold">Shader R&D</div>
+                        </div>
+                        <div class="flex gap-2">
+                            <span class="w-2 h-8 bg-indigo-500 rounded-sm"></span>
+                            <span class="w-2 h-6 bg-cyan-500 rounded-sm opacity-50"></span>
+                            <span class="w-2 h-4 bg-purple-500 rounded-sm opacity-30"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品展示 (Works Section) -->
+    <section id="works" class="py-24 px-12 relative">
+        <div class="flex justify-between items-end mb-16">
+            <div>
+                <span class="text-indigo-400 font-mono text-xs tracking-widest uppercase mb-2 block">Selected Works</span>
+                <h2 class="text-5xl font-bold text-white relative inline-block">
+                    精选案例
+                    <div class="absolute -right-4 -top-1 w-2 h-2 bg-cyan-400 rounded-full"></div>
+                </h2>
+            </div>
+            
+            <!-- 过滤器 -->
+            <div class="flex gap-2 p-1.5" id="filter-container">
+                <button class="filter-btn active text-sm px-5 py-2 rounded-lg transition-all font-medium" data-filter="all">全部</button>
+                <button class="filter-btn text-slate-500 hover:text-slate-200 text-sm px-5 py-2 rounded-lg transition-all font-medium" data-filter="video">混剪</button>
+                <button class="filter-btn text-slate-500 hover:text-slate-200 text-sm px-5 py-2 rounded-lg transition-all font-medium" data-filter="project">参与项目</button>
+                <button class="filter-btn text-slate-500 hover:text-slate-200 text-sm px-5 py-2 rounded-lg transition-all font-medium" data-filter="fx">效果实现</button>
+                <button class="filter-btn text-slate-500 hover:text-slate-200 text-sm px-5 py-2 rounded-lg transition-all font-medium" data-filter="pcg">程序化生成</button>
+                <button class="filter-btn text-slate-500 hover:text-slate-200 text-sm px-5 py-2 rounded-lg transition-all font-medium" data-filter="tool">工具开发</button>
+            </div>
+        </div>
+
+        <!-- 作品网格 -->
+        <div class="grid grid-cols-3 gap-6" id="work-grid">
+            <!-- 作品 1 -->
+            <div class="work-card group rounded-2xl overflow-hidden p-3" data-category="project">
+                <div class="relative h-60 rounded-xl overflow-hidden mb-5 bg-slate-800">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="demo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent"></div>
+                    <div class="absolute bottom-3 left-3 right-3 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+                        <span class="text-xs bg-white text-dark px-2 py-1 rounded font-bold uppercase">View Project</span>
+                        <div class="w-8 h-8 rounded-full bg-dark/50 backdrop-blur flex items-center justify-center border border-white/20">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 text-white"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="tag">UE5</span>
+                        <span class="tag">Optimization</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-100 group-hover:text-indigo-300 transition-colors">开放世界渲染优化</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed line-clamp-2">针对移动端的大型地图 HLOD 方案，结合 Runtime VT 优化地表材质开销，提升帧率 25%。</p>
+                </div>
+            </div>
+
+            <!-- 作品 2 -->
+            <div class="work-card group rounded-2xl overflow-hidden p-3" data-category="fx">
+                <div class="relative h-60 rounded-xl overflow-hidden mb-5 bg-slate-800">
+                    <img src="https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=600&q=80" alt="demo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-transparent group-hover:bg-indigo-900/10 transition-colors"></div>
+                    <div class="absolute top-3 right-3 w-8 h-8 bg-black/40 backdrop-blur rounded-lg flex items-center justify-center border border-white/10">
+                        <i data-lucide="aperture" class="w-4 h-4 text-cyan-400"></i>
+                    </div>
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="tag">HLSL</span>
+                        <span class="tag">NPR</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-100 group-hover:text-indigo-300 transition-colors">NPR 风格化角色渲染</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed line-clamp-2">基于深度信息的自适应描边方案，配合自定义光照模型实现二次元动态阴影。</p>
+                </div>
+            </div>
+
+            <!-- 作品 3 -->
+            <div class="work-card group rounded-2xl overflow-hidden p-3" data-category="pcg">
+                <div class="relative h-60 rounded-xl overflow-hidden mb-5 bg-slate-800">
+                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=600&q=80" alt="demo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="tag">Houdini</span>
+                        <span class="tag">PCG</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-100 group-hover:text-indigo-300 transition-colors">程序化植被系统</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed line-clamp-2">使用 Houdini Engine 全自动生成地表覆盖，支持基于地形坡度和高度的自动分布。</p>
+                </div>
+            </div>
+
+            <!-- 作品 4 -->
+            <div class="work-card group rounded-2xl overflow-hidden p-3" data-category="tool">
+                <div class="relative h-60 rounded-xl overflow-hidden mb-5 bg-slate-800">
+                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=600&q=80" alt="demo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="px-4 py-2 bg-indigo-600 rounded-lg text-xs font-bold shadow-lg shadow-indigo-500/30">View Repo</span>
+                    </div>
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="tag">Python</span>
+                        <span class="tag">Maya API</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-100 group-hover:text-indigo-300 transition-colors">资产自动化检查工具</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed line-clamp-2">一键校验模型拓扑、UV 重叠与命名规范，集成至 Jenkins CI 流水线。</p>
+                </div>
+            </div>
+
+            <!-- 作品 5 -->
+            <div class="work-card group rounded-2xl overflow-hidden p-3" data-category="video">
+                <div class="relative h-60 rounded-xl overflow-hidden mb-5 bg-slate-800">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="demo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:bg-black/30 transition-colors">
+                        <div class="w-14 h-14 rounded-full border border-white/30 flex items-center justify-center bg-white/10 backdrop-blur group-hover:scale-110 transition-transform">
+                            <i data-lucide="play" class="text-white w-5 h-5 fill-white ml-0.5"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-2 pb-2">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <span class="tag border-indigo-500/30 text-indigo-300">Showreel</span>
+                        <span class="tag">2024</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-slate-100 group-hover:text-indigo-300 transition-colors">2024 年度作品混剪</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed line-clamp-2">集合过去一年在 Shader 研发和管线搭建领域的最佳视觉成果。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 (Contact Section) -->
+    <section id="contact" class="py-24 px-12 relative overflow-hidden bg-gradient-to-t from-black to-transparent">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+            <h2 class="text-6xl font-bold mb-6">Let's Create <span class="gradient-text italic">Magic</span></h2>
+            <p class="text-slate-400 text-xl font-light">准备好开启下一个视觉奇迹了吗？</p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <!-- 邮箱卡片 -->
+            <div class="bg-card/40 backdrop-blur-xl border border-white/5 p-10 rounded-[32px] flex flex-col justify-between hover:border-indigo-500/30 transition-colors group">
+                <div>
+                    <div class="w-12 h-12 bg-surface rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-500/20 transition-colors">
+                        <i data-lucide="mail-plus" class="text-indigo-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">简历投递 & 合作</h3>
+                    <p class="text-slate-500 mb-8">随时欢迎通过邮件与我取得联系。</p>
+                </div>
+                <a href="mailto:1758972636@qq.com" class="text-2xl font-mono font-bold text-slate-200 hover:text-cyan-400 transition-colors border-b border-white/10 pb-1 inline-block w-fit">
+                    1758972636@qq.com
+                </a>
+            </div>
+
+            <!-- 简单表单 -->
+            <div class="bg-card/40 backdrop-blur-xl border border-white/5 p-10 rounded-[32px]">
+                <h4 class="text-lg font-bold mb-6 flex items-center gap-2 text-slate-300">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> 
+                    发送快速留言
+                </h4>
+                <div class="space-y-4">
+                    <input type="text" placeholder="您的称呼 / 团队" class="w-full bg-dark/30 border border-white/10 rounded-xl px-5 py-4 focus:border-indigo-500 focus:bg-indigo-500/5 outline-none transition-all placeholder:text-slate-600">
+                    <textarea placeholder="有什么我能帮您的..." rows="3" class="w-full bg-dark/30 border border-white/10 rounded-xl px-5 py-4 focus:border-indigo-500 focus:bg-indigo-500/5 outline-none transition-all resize-none placeholder:text-slate-600"></textarea>
+                    <button class="w-full bg-slate-100 text-dark font-bold py-4 rounded-xl hover:bg-gradient-to-r hover:from-indigo-500 hover:to-cyan-500 hover:text-white transition-all shadow-lg shadow-white/5 hover:shadow-indigo-500/20">
+                        发送消息
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-10 px-12 border-t border-white/5 flex justify-between items-center text-slate-600 text-xs uppercase tracking-wider">
+        <p>&copy; 2024 TECH ARTIST PORTFOLIO.</p>
+        <div class="flex gap-6">
+            <span class="hover:text-cyan-400 cursor-pointer transition-colors">Design</span>
+            <span class="hover:text-cyan-400 cursor-pointer transition-colors">Code</span>
+            <span class="hover:text-cyan-400 cursor-pointer transition-colors">Render</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始化图标
+            lucide.createIcons();
+
+            // 作品集过滤功能
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const workCards = document.querySelectorAll('.work-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 切换按钮状态
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active');
+                        b.classList.add('text-slate-500');
+                        b.classList.remove('text-indigo-400');
+                    });
+                    btn.classList.add('active');
+                    btn.classList.remove('text-slate-500');
+
+                    const filter = btn.getAttribute('data-filter');
+
+                    // 过滤动画
+                    workCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        if (filter === 'all' || category === filter) {
+                            card.style.display = 'block';
+                            // 使用 requestAnimationFrame 确保 display:block 后 opacity 动画生效
+                            requestAnimationFrame(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0) scale(1)';
+                            });
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(10px) scale(0.98)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300); // 等待动画结束
+                        }
+                    });
+                });
+            });
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
