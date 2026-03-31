@@ -80,7 +80,7 @@ function initPortfolioFilter() {
             portfolioItems.forEach((item, index) => {
                 const category = item.getAttribute('data-category');
                 
-                if (filter === 'all' || category === filter) {
+                if (filter === 'all' || (category && category.split(' ').includes(filter))) {
                     // 显示项目
                     item.classList.remove('hidden');
                     item.style.animation = `fadeIn 0.5s ease ${index * 0.1}s forwards`;
